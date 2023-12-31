@@ -59,9 +59,43 @@ export default class Slide {
         this.wrapper.addEventListener('touchend', this.onEnd);//mobile, igual ao mouseup
     }
 
-    init() {
+    calcSlidePosition(slide) {
+        //tamanho da tela total - tamanho do slide / 2, isto dá as bordas/margins do slide
+        const margin = (this.wrapper.offsetWidth - slide.offsetWidth) / 2;
+        return -(slide.offsetLeft - margin);
+    }
+
+    // Slides Config
+    slidesConfig() {
+        //transforma a ul em um array, contendo todas as li
+        this.slideArray = [...this.slide.children].map((element) => {
+            const positionItem = this.calcSlidePosition(element);
+            return { positionItem, element };
+        });
+    }
+
+    slidesIndexNav(index) {
+        const lastSlide = this.slideArray.length - 1;
+        console.log(lastSlide)
+        this.index = {
+            prevSlide: index ? index - 1 : undefined, // se for o primeiro slide[0], dará false, logo o prev será undefined
+            actualSlide: index,
+            nextSlide: index === lastSlide ? undefined : index + 1
+        }
+    }
+
+    changedSldie(index) {
+        const activeSlide = this.slideArray[index];
+        this.moveSlide(activeSlide.positionItem);
+        this.slidesIndexNav(index);
+        this.dist.finalPosition = activeSlide.positionItem;
+    }
+
+    // Inicializar
+    init() {      
         this.bindEvents();
         this.addSlideEvent();
+        this.slidesConfig();
         return this;
     }
 }
