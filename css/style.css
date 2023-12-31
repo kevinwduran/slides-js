@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img{
+    display: block;
+    max-width: 100%;
+}
+
+.slide-wrapper{
+    overflow: hidden; /* tira a visibilidade das barras horizontais e verticais */
+}
+
+/* slide */
+.slide {
+    display: flex;
+}
+
+.slide li{
+    flex-shrink: 0; /* imagens não se encolhem para caber na tela */
+    width: 80vw;
+    max-width: 800px;
+    margin: 0 20px;
+}
