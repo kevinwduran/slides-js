@@ -3,4 +3,4 @@ import Slide from './slide.js';
 const slide = new Slide('.slide-wrapper', '.slide');
 slide.init();
 
-slide.changedSldie(3)
+slide.changedSlide(3)
