@@ -1,6 +1,6 @@
 import debounce from "./debounce.js";// para resize
 
-export default class Slide {
+export class Slide {
     constructor(wrapper, slide) {
         this.wrapper = document.querySelector(wrapper); //div
         this.slide = document.querySelector(slide); //ul com li's e img's
@@ -171,7 +171,7 @@ export default class Slide {
     }
 }
 
-export class SlideNav extends Slide {
+export default class SlideNav extends Slide {
     constructor(slide, wrapper) {
         super(slide, wrapper);
         this.bindControls();
