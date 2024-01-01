@@ -1,7 +1,7 @@
 export default class Slide {
     constructor(wrapper, slide) {
-        this.wrapper = document.querySelector(wrapper);
-        this.slide = document.querySelector(slide);
+        this.wrapper = document.querySelector(wrapper); //div
+        this.slide = document.querySelector(slide); //ul com li's e img's
         this.dist = {
             finalPosition: 0,
             startX: 0,
@@ -16,7 +16,9 @@ export default class Slide {
         this.onEnd = this.onEnd.bind(this);
     }
 
-    // método para transição
+    // método para transição, recebe true e false
+    // antes de clicar em algum slide o valor está como true (init), ao clicar e mover: false (onStart)
+    // ao soltar o mouse: true (onEnd)
     transition(active) {
         this.slide.style.transition = active ? 'transform .3s' : '';
     }
@@ -55,9 +57,10 @@ export default class Slide {
         this.moveSlide(finalPosition);
     }
 
+    // método após soltar o slide
     onEnd(event) {
         const moveType = (event.type === 'mouseup') ? 'mousemove' : 'touchmove';
-        this.wrapper.removeEventListener(moveType, this.onMove);
+        this.wrapper.removeEventListener(moveType, this.onMove); //rem
         this.dist.finalPosition = this.dist.movePosition;
         this.transition(true);
         this.changeSlideOnEnd();
